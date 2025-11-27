@@ -1,10 +1,11 @@
 # CVPDL 2025 Homework 3: Image Generation
 
 ## Overview
-This project implements image generation for MNIST images using a custom model train from scratch. 
+This project implements image generation for MNIST images using a DDPM train from scratch. 
 
 ## Features
-- Custom dataset handling for MNIST images and annotations.
+- DDPM implementation for mnist dataset
+- FID calculation for result
 
 ## Installation
 
@@ -25,48 +26,40 @@ Set up the environment (please install `uv` first):
    - Other dependencies as listed in `requirements.txt`
 
 ## Usage
-- **Note: please put dataset `train` and `test` under the `src` directory**
+- **Note: please add another folder `images` under `mnist` dataset, and put all 60000 training images under `mnist/images/`**
 - **Note: please run the scripts in the `src` directory**
   ```bash
   cd src
   ```
 
-1. **Data Preparation**:
-   - Run the data preparation script:
-     ```bash
-     python yolo_dataset.py
-     ```
-   - (Optional) Run the tuning script:
-     ```bash
-     python yolo_tune.py
-     ```
-
-2. **Training**:
+1. **Training**:
    - Run the training script:
      ```bash
-     python yolo_train.py
+     python train.py
      ```
-   - This will train the model, perform validation, and save checkpoints in `runs/detect/<model_name>` directory.
-   - It will also save train and validation loss in `runs/detect/<model_name>/results.csv` directory.
+   - This will train the model, perform validation, and save model as `ddpm_mnist_custom.pth`
 
-3. **Inference**:
+2. **Inference**:
    - Use the inference script to run predictions on new images:
      ```bash
-     python yolo_inference.py
+     python inference.py
      ```
+   - This will generate 10000 images in the path `generated_images_10k/`
 
-4. **Evaluation: FID**:
+3. **Evaluation: FID**:
    - FID with the training dataset
      ```bash
-     python -m pytorch_fid path/to/images path/to/mnist
+     python -m pytorch_fid generated_images_10k mnist.npz
      ```
-   - FID with the test dataset
+   - the result FID: `29.965259357164655`
+
+4. **Visualization**:
+   - Draw diffusion process (8x8)
      ```bash
-     python -m pytorch_fid path/to/images path/to/mnist.npz
+     python visual.py
      ```
-        - `path/to/images`: the folder of the generated images.
-        - `path/to/mnist`: the folder of the training data.
-        - `path/to/mnist.npz`: the precalculated mean and covariance of training data.
+   - the result diffusion processs will be saved as `diffusion_process_8x8.png`
+
 
 ## Contributing
 This is a homework project for NTU_CVPDL_2025. For questions, refer to the course materials or contact the instructor.
