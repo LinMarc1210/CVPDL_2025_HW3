@@ -20,4 +20,5 @@ wheels/
 
 # model weights
 *.npz
+*.pth
 

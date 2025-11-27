@@ -8,7 +8,9 @@ dependencies = [
   "torch==2.8.0+cu129",
   "torchvision==0.23.0",
   "pandas>=2.3.3",
-  "pytorch-fid"
+  "pytorch-fid==0.3.0",
+  "numpy>=2.0.0",
+  "tqdm>=4.66.1",
 ]
 
 [tool.uv.sources]
